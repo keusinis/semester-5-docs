@@ -1,17 +1,19 @@
-\documentclass[12pt]{article}  
-\usepackage[utf8]{inputenc}    
-\usepackage{biblatex}         
+\documentclass{article}
 
-\title{Team agreement}
-\author{Team Name}
+\title{Team Agreement}
 \date{\today}
+\author{Team name}
 
 \begin{document}
+\pagenumbering{gobble}
+    \input{sections/title.tex}
+    \newpage
+    \pagenumbering{arabic}
 
-\maketitle
-\tableofcontents
-
-\input{sections/intro.tex}
-
-\printbibliography
+    \section{Subsection}
+    Hello world!
+    \subsection{subsection}
+    Text
+    \paragraph{numero uno}
+    Text in paragraph
 \end{document}
