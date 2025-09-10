@@ -1,0 +1,24 @@
+# Compiled PDF
+*.pdf
+
+# Auxiliary files
+*.aux
+*.log
+*.toc
+*.out
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+
+# Temporary editor files
+*~
+*.swp
+*.bak
+
+# Latexmk files
+*.fls
+*.fdb_latexmk
