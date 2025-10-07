@@ -1,0 +1,61 @@
+@startuml refund
+ 
+title Order refund process
+participant Operator
+participant Client
+participant Server
+participant "Stripe API" as stripe
+
+autonumber
+
+Operator->Client: Open closed orders
+activate Client
+Client->Server: Get closed orders
+activate Server
+Server-->Client: Return list of closed orders
+deactivate Server
+Client-->Operator: Display closed orders
+Operator->Client: Select order
+Client-->Operator: Display order information
+Operator->Client: Select refund
+opt partial refund
+Operator->Client: Select refund amount
+
+end
+ 
+alt order paid in cash
+    Client->Server: Mark order as refunded
+activate Server
+    Server->Client: Order marked as refunded
+deactivate Server
+
+else order paid with card 
+    Client->Server: Initialize refund
+activate Server
+    Server->stripe: refund\npayment_intent_id
+    activate stripe
+    create "Stripe Refund Object" as refund
+    stripe->>refund: Create refund object
+    activate refund
+    stripe->>refund: Mark refund as pending
+    refund->refund: Push funds back
+    refund-->stripe: succeeded
+    note right
+    settlement may 
+    still take days
+    at the bank level
+    end note
+    stripe-->Server: succeeded\n(mark as refunded)
+    deactivate stripe
+    deactivate refund
+    Server->Client: Order marked as refunded
+deactivate Server
+
+else gift-card
+    Client->Server: Add funds to gift_card_id
+activate Server
+    Server->Client: Order marked as refunded
+deactivate Server
+end
+    Client-->Operator: Refund success 
+@enduml refund

@@ -1,3 +1,4 @@
+@startuml employee-management
 title Employee management
 
 Manager -> Client: Chooses to add a new employee
@@ -28,3 +29,4 @@ Client -> Server: Insert new employee record with status=Inactive
 Server --> Client: Success
 Client --> Manager: Success
 end
+@enduml employee-management
