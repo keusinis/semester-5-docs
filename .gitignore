@@ -25,3 +25,6 @@
 
 #puml out folder
 out/
+
+#vscode settings
+.vscode/
