@@ -22,3 +22,6 @@
 # Latexmk files
 *.fls
 *.fdb_latexmk
+
+#puml out folder
+out/
