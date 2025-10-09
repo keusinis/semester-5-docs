@@ -1,0 +1,32 @@
+title Order creation workflow
+
+participant Operator
+participant Client
+participant Server
+
+Operator->Client:Create order
+activate Client
+Client-->Operator:Order is created
+loop all Items are added to order
+alt add new item
+  Operator->Client:Modify and add item
+  Client-->Operator:Display order items
+else modify or remove order item
+  Operator->Client:Select order item
+  Client-->Operator:Display order item
+  Operator->Client:Modify or remove order item
+  Client-->Operator:Display order items
+end
+end
+alt Customer confirms order
+  Operator->Client:Confirm Order
+  Client->Server:Upload order
+  activate Server
+  Server-->Client:Order is pending
+  deactivate Server
+  Client-->Operator:Display order payment
+else Customer cancels order
+  Operator->Client:Cancel order
+  Client-->Operator:Display menu
+  deactivate Client
+end
