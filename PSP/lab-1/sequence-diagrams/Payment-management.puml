@@ -1,5 +1,8 @@
 title Payment System
-
+opt Add tip
+	Operator->Client: Add tip amount
+	Client-->Operator: Show new total sum
+end
 loop Until total sum is paid
   Operator->Client: Select payment method, amount
   alt Cash Payment
@@ -7,15 +10,13 @@ loop Until total sum is paid
     Server-->Client: Confirm cash payment
     Client-->Operator: Show remaining balance
   else Card Payment
-    Client->Server: Upload card payment info
-    Server->Stripe: Create payment intent
+    
+    Client->Stripe: Create payment intent
     alt Payment Authorized
-      Stripe-->Server: Payment authorized
-      Server-->Client: Confirm card payment
+      Stripe-->Client: Payment authorized
       Client-->Operator: Show remaining balance
     else Payment Declined
-      Stripe-->Server: Payment declined
-      Server-->Client: Decline
+      Stripe-->Client: Payment declined
       Client-->Operator: Show error, retry
     end
   else GiftCard Payment
