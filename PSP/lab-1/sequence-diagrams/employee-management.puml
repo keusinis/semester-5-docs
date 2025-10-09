@@ -1,32 +1,53 @@
 @startuml employee-management
 title Employee management
 
-Manager -> Client: Chooses to add a new employee
-Client --> Manager: New employee object created
-Manager -> Client: Input employee info
-Client -> Server: Insert new employee record with status=1
-Server --> Client: Success
-Client --> Manager: Success
+participant Business owner
+participant Client
+participant Server
 
-opt 
-Manager -> Client: Selects "Edit employee" functionality
+Business owner -> Client: Selects "Edit employees" functionality
+activate Client
 Client -> Server: Get current employees
+activate Server
 Server --> Client: Returns current employees
-Client --> Manager: Shows current employees
-Manager -> Client: Selects which employees info to edit
-Client -> Server: Insert a new version of the employee record with updated fields and a newer timestamp
+deactivate Server
+Client --> Business owner: Shows current employees
+deactivate Client
+
+
+
+opt
+Business owner -> Client: Chooses to add a new employee
+activate Client
+Client --> Business owner: New employee object created
+Business owner -> Client: Input employee info
+Client -> Server: Insert new employee record with status=1
+activate Server
 Server --> Client: Success
-Client --> Manager: Success
+deactivate Server
+Client --> Business owner: Success
+deactivate Client
 end
 
 opt 
-Manager -> Client: Selects "Fire employee" functionality
-Client -> Server: Get current employees
-Server --> Client: Returns current employees
-Client --> Manager: Shows current employees
-Manager -> Client: Selects which employee to fire
-Client -> Server: Insert new employee record with status=0
+Business owner -> Client: Selects "Edit employee"
+activate Client
+Client -> Server: Insert a new version of the employee record with updated fields and a newer timestamp
+activate Server
 Server --> Client: Success
-Client --> Manager: Success
+deactivate Server
+Client --> Business owner: Success
+deactivate Client
+end
+
+opt 
+Business owner -> Client: Selects "Fire employee"
+activate Client
+Client -> Server: Insert new employee record with status=0
+activate Server
+Server --> Client: Success
+deactivate Server
+Client --> Business owner: Success
+deactivate Client
 end
 @enduml employee-management
