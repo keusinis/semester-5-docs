@@ -339,4 +339,62 @@ In the \cref{fig:Inv_management} inventory management design provides an interfa
 \noindent
 In the \cref{fig:Split_payment} interface design provides an interface to divide the bill into multiple payments and select different payment methods for each part, that can be adjusted. [\cref{N1-10}: N10]
 
+\section{Alternative wireframes}
+
+\subsection{Implemented user needs}
+\begin{itemize}
+\item Juan needs a wide user-interface language selection (at least 5 widely
+used languages), to ensure his work does not get obstructed of a language
+barrier during order taking, especially with unusual requests.
+\item  Carlos and Juan need to be able to use the search to find items in their
+native language, so they can find items quickly and without the need to
+memorize foreign item names.
+\item  Laura needs to be able to see the remaining product stock during order
+entry into the system. She would not have to confirm with cooks that there
+are enough products for the order, saving both her and the customers time.
+\item Laura needs a feature to enter the remaining product stock during stocktaking or when needed so that an accurate inventory situation is portrayed
+during service hours, in order to know which items are still available for
+sale.
+\item  Laura needs a feature that decrements the remaining product stock after
+each sale made during service and gives a warning when certain items
+reaches a set (adjustable) near out-of-stock amount. This would prevent
+selling an item that is out of stock or near it without noticing.
+\item Laura requires refund support, as the customer may request a refund if
+they are not satisfied.
+\item Trevor needs the ability to access information about menu items, such as
+their ingredients and descriptions, so he could provide feedback to customers’ questions without having to ask the manager.
+\item Renata needs to be able to quickly generate an invoice for a specific order
+and have options to print out or send the receipt according to customer
+request.
+\item  Renata needs a capability to swiftly split up a specific order into multiple
+orders at any given time in during order taking.
+\item Janina needs to be able to discount multiple items simultaneously, so she
+would not have to waste time doing it manually on each item separately.
+\item  Janina needs discounts to be automatically calculated on discounted items,
+for example -10\% on coffees for a week, so that she does not have to
+calculate it by hand and potentially make errors and waste her time.
+\item  Janina needs an accurate and reliable inventory management functionality.
+\item Employee management: Only the owner can add, remove or edit employees
+of their business.
+\item SuperAdmin: account with SuperAdmin privileges can edit anyone (e. g.,
+add a new business with relevant details, such as contact information,
+owner user, name).
+\item Payment method support: The system must support multiple payment
+methods, including cash, card, and gift cards.
+\end{itemize}
+
+\subsection{Information architecture solutions}
+
+\subsubsection{Ontology}
+The ontology is coarse-grained, there is one way to reach an item by going through categories, for example selecting orders then desserts.
+\subsubsection{Design approaches}
+The design is top-down approach, because food is categorized in non-overlapping categories(main dishes, deserts, beverages, snacks etc.)
+\subsubsection{IA structures}
+The structure is mainly hierarchical, as there is a home page, where a user can select a category to navigate (orders, account, settings etc.) and then do actions within that category, or select other categories, for example, select deserts in orders category.
+\subsubsection{Content organization schemes}
+
+\subsubsection{Labeling system and search patterns}
+
+\subsection{Used prototyping tools and instructions for evaluators}
+
 \end{document}

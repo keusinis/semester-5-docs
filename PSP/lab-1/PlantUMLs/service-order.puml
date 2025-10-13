@@ -1,0 +1,45 @@
+@startuml
+
+Title Registering for a service workflow
+
+Participant Operator as op
+Participant Client as cl
+Participant Server as srv
+Participant "SMS service" as sms
+
+op -> cl: Create service order
+
+loop 1..n services
+    op -> cl: Select service
+    cl -> srv: Get service time table
+    srv --> cl: Time table
+    cl --> op: Time table
+    op ->> cl: Select date
+    op ->> cl: Select time
+    op -> cl: Add to order
+    cl --> op: Service added to order
+end loop
+
+alt confirm order
+    op ->> cl: Enter customer mobile number
+    op ->> cl: Enter customer name
+    op -> cl: Confirm order
+    cl -> srv: Upload order
+    srv ->> sms: Send SMS reminder
+
+    note over sms
+    Customer receives SMS
+    right after order is confirmed,
+    another SMS is scheduled to
+    the day before each service
+    end note
+
+    srv --> cl: Order is uploaded
+    cl --> op: Order created successfully
+
+else cancel order
+    op -> cl: Cancel order
+    cl --> op: Order is cancelled
+end alt
+
+@enduml

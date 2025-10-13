@@ -1,0 +1,48 @@
+@startuml payment
+
+title Payment workflow
+
+opt Add tip
+  Operator->Client: Add tip amount
+  Client-->Operator: Show new total sum
+end
+
+loop Until total sum is paid
+  Operator->Client: Select payment method, amount
+
+  alt Cash Payment
+    Client->Server: Upload cash payment
+    Server-->Client: Return sum to pay
+    Client-->Operator: Show sum to pay
+
+  else Card Payment
+    Client->Stripe: Create payment intent
+    alt Payment Authorized
+      Stripe-->Client: Payment successful 
+      Client->Server: Notify successful Stripe payment
+
+      Server-->Client: Return sum to pay
+      Client-->Operator: Show sum to pay
+    else Payment Declined
+      Stripe-->Client: Payment declined
+      Client-->Operator: Show error, retry
+    end
+
+  else GiftCard Payment
+    Client->Server: Upload gift card payment info
+    
+    alt Payment Accepted
+      Server->Server: Deduct from gift card balance
+      Server-->Client: Confirm gift card payment
+      Client-->Operator: Show sum to pay
+    else Insufficient Balance
+      Server-->Client: Decline payment
+      Client-->Operator: Show error, retry
+    end
+  end
+end
+
+Client->Server: Upload closed order
+Server-->Client: Receipt
+
+@enduml payment

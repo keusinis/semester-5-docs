@@ -1,6 +1,7 @@
 @startuml refund
  
-title Order refund process
+title Order refund workflow
+
 participant Operator
 participant Client
 participant Server
@@ -57,5 +58,6 @@ activate Server
     Server->Client: Order marked as refunded
 deactivate Server
 end
-    Client-->Operator: Refund success 
+    Client-->Operator: Refund success
+
 @enduml refund

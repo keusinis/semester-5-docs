@@ -1,0 +1,34 @@
+@startuml order
+
+title Order (non-service) creation workflow
+
+participant Operator
+participant Client
+participant Server
+
+Operator->Client:Create order
+Client-->Operator:Order is created
+
+loop 1..n items
+  alt add new item
+    Operator->Client:Modify and add item
+    Client-->Operator:Display order items
+  else modify or remove order item
+    Operator->Client:Select order item
+    Client-->Operator:Display order item
+    Operator->Client:Modify or remove order item
+    Client-->Operator:Display order items
+  end
+end
+
+alt Customer confirms order
+  Operator->Client:Confirm Order
+  Client->Server:Upload order
+  Server-->Client:Order uploaded
+  Client-->Operator:Display order payment info
+else Customer cancels order
+  Operator->Client:Cancel order
+  Client-->Operator:Display menu
+end
+
+@enduml order
