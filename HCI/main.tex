@@ -2,7 +2,7 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{enumitem} % for customisible enumerators
 \usepackage{float} % for text under pictures
-\usepackage[colorlinks=true, linkcolor=black]{hyperref} % for links in refs
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=cyan]{hyperref} % for links in refs
 \usepackage{cleveref} % for easier referencing
 \usepackage{caption} % easier captioning for tables
 \captionsetup[table]{position=above}
@@ -112,7 +112,7 @@ Team responsible for maintenance and development expects a system that can be sc
 \paragraph{\small People:} Mostly young hospitality workers varied in ethnic backgrounds who have high motivation to succeed, with the exception of elderly personnel, who are not so handy with technology, some of whom lack sufficient training or struggle with the language barrier of the system.
 \paragraph{\small Activities:} Daily high pressure and quick response time work consisting of handling order input and searching for important information - sometimes stressful safety-critical situations where customers' health could be at risk. The main goal is to do your job as quickly and as correctly as possible.
 \paragraph{\small Context:} Physical environment is loud, warm or even hot near the kitchen area, filled with a variety smells and noises. The space where the workers manage orders system is well lit, but the main dining area is lit quite dimly. Social environment consists of constant interactions with customers and colleagues as well as individual concern of getting orders correctly.
-\paragraph{\small Technologies:} A touch screen interface facing the worker to input orders, edit them or close tabs. Printer for checks and hand card terminal for cashless transactions.
+ \paragraph{\small Technologies:} A touch screen interface facing the worker to input orders, edit them or close tabs. Printer for checks and hand card terminal for cashless transactions.
 
 % add main functions like login and cancel, refund etc (function list)
 \subsubsection{Needs}
@@ -376,25 +376,41 @@ calculate it by hand and potentially make errors and waste her time.
 \item  Janina needs an accurate and reliable inventory management functionality.
 \item Employee management: Only the owner can add, remove or edit employees
 of their business.
-\item SuperAdmin: account with SuperAdmin privileges can edit anyone (e. g.,
-add a new business with relevant details, such as contact information,
-owner user, name).
 \item Payment method support: The system must support multiple payment
 methods, including cash, card, and gift cards.
 \end{itemize}
 
 \subsection{Information architecture solutions}
-
 \subsubsection{Ontology}
-The ontology is coarse-grained, there is one way to reach an item by going through categories, for example selecting orders then desserts.
+The ontology is coarse-grained. Main grains for employees being: 
+\begin{itemize}
+    \item Home (the ordering window)
+    \item Orders (already processed order)
+    \item Account (password management)
+    \item Settings (for customization)
+\end{itemize}
+If business owner or a manager is logged in a few more grains are visible for them: 
+\begin{itemize}
+    \item Inventory (inventory management)
+    \item Employees (employee management)
+\end{itemize}
+%navigation: The home window has 3 main entities: the left-side menu, food menu, that has food categories for faster filtering, and then order detail menu.
 \subsubsection{Design approaches}
-The design is top-down approach, because food is categorized in non-overlapping categories(main dishes, deserts, beverages, snacks etc.)
-\subsubsection{IA structures}
+The design is top-down approach, because food is categorized in non-overlapping categories(main dishes, deserts, beverages, snacks etc.) The design is task oriented, built around typical workflows and focused on layout, structure and navigation.
+\subsubsection{IA structures} % idet map
 The structure is mainly hierarchical, as there is a home page, where a user can select a category to navigate (orders, account, settings etc.) and then do actions within that category, or select other categories, for example, select deserts in orders category.
-\subsubsection{Content organization schemes}
+\subsubsection{Content organization schemes} % popularity i ambigious
+Content is organized using an exact organization scheme, as the criteria for displaying information is clearly defined and objective. For example, within each food category, items are listed by popularity to speed up ordering procedure. Orders are displayed chronologically with the oldest first, because they are the most likely to be completed next. % fix this
+Employees are sorted alphabetically by name to allow quick lookup and efficient management. 
+\subsubsection{Navigation patterns}
+\begin{itemize}
+    \item \textbf{Vertical navigation:} The left-hand vertical sidebar menu (Home, Orders, Account, Inventory, Employees, Settings, Log out) provides immediate access to the main sections of the system.
+    \item \textbf{Tab bar:} The horizontal tab menu allows users to quickly switch between different food categories.
+\end{itemize}
 
 \subsubsection{Labeling system and search patterns}
-
+Labels are clear and functional, mostly descriptive text based with the exception of some simple, standard icons for universal actions. %pridet pictogramas
+Also there is a search bar in home page, orders and employess, for fast lookup if you know some details of what you are looking for, like the name of the dish or employee.
 \subsection{Used prototyping tools and instructions for evaluators}
-
+We used the Balsamiq fast prototyping tool.\\ Link to the repository of the first mockup: \url{https://balsamiq.cloud/sqra904/pcx65zj}
 \end{document}
