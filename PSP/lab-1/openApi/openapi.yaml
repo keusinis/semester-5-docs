@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: "PoS application API contracts"
-  version: "1.0.0"
+  version: 1.0.0
   description: |
     This API uses JWT-based Bearer authentication 
     Users must log in via `/login` to obtain an access token
@@ -21,8 +21,8 @@ tags:
   - name: Appointment
  
 servers:
-  - url: https://apipos-systemcom/v1
- 
+  - url: https://apipos-system.com
+
 security:
   - BearerAuth: []
 
@@ -31,6 +31,7 @@ paths:
   /login:
     post:
       summary: Authenticate a user and issue a JWT token
+      security: []
       tags:
         - Authentication
       requestBody:
@@ -74,10 +75,9 @@ paths:
   /logout:
     post:
       summary: Log out the currently authenticated user
+      security: []
       tags:
         - Authentication
-      security:
-        - BearerAuth: []
       responses:
         '204':
           description: User successfully logged out
@@ -90,11 +90,9 @@ paths:
   
   /employees/add:
     post:
-      summary: Create a new employee under an organisation
+      summary: Create a new employee under an organization
       tags:
         - User Management
-      security:
-        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -142,8 +140,6 @@ paths:
       description: Modify details of an existing employee account
       tags:
         - User Management
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: employeeId
@@ -188,18 +184,16 @@ paths:
           
   /employees/{organizationId}:
     get:
-      summary: Retrieve all employees in a specific organisation
+      summary: Retrieve all employees in a specific organization
       tags:
         - User Management
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: organizationId
           required: true
           schema:
             type: string
-          description: The ID of the organisation to fetch employees for
+          description: The ID of the organization to fetch employees for
       responses:
         '200':
           description: List of employees successfully retrieved
@@ -232,8 +226,6 @@ paths:
       summary: Retrieve a paginated list of organizations Accessible to super users
       tags:
         - Organization
-      security:
-        - BearerAuth: []
       parameters:
         - name: page
           in: query
@@ -279,8 +271,6 @@ paths:
       summary: Create a new organization in the POS system Accessible to super users
       tags:
         - Organization
-      security:
-        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -306,8 +296,6 @@ paths:
       summary: Retrieve detailed information about a specific organization
       tags:
         - Organization
-      security:
-        - BearerAuth: []
       parameters:
         - name: organizationId
           in: path
@@ -332,8 +320,6 @@ paths:
       summary: Update an existing organization's data such as name, contact info, or address Accessible to super users or business owners
       tags:
         - Organization
-      security:
-        - BearerAuth: []
       parameters:
         - name: organizationId
           in: path
@@ -367,8 +353,6 @@ paths:
       summary: Get all inventory items for the authenticated organization
       tags:
         - Inventory
-      security:
-        - BearerAuth: []
       responses:
         '200':
           description: List of inventory items
@@ -389,8 +373,6 @@ paths:
       summary: Create a new inventory item for the authenticated organization
       tags:
         - Inventory
-      security:
-        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -416,8 +398,6 @@ paths:
       summary: Get a specific inventory item for the authenticated organization
       tags:
         - Inventory
-      security:
-        - BearerAuth: []
       parameters:
         - name: inventoryItemId
           in: path
@@ -444,8 +424,6 @@ paths:
       summary: Update a specific inventory item for the authenticated organization
       tags:
         - Inventory
-      security:
-        - BearerAuth: []
       parameters:
         - name: inventoryItemId
           in: path
@@ -479,8 +457,6 @@ paths:
       summary: List all taxes
       tags:
         - Tax
-      security:
-        - BearerAuth: []
       responses:
         '200':
           description: OK
@@ -501,8 +477,6 @@ paths:
       summary: Create a new tax
       tags:
         - Tax
-      security:
-        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -529,8 +503,6 @@ paths:
       summary: Get tax by ID
       tags:
         - Tax
-      security:
-        - BearerAuth: []
       parameters:
         -  name: taxId
            in: path
@@ -557,8 +529,6 @@ paths:
       summary: Update tax by ID
       tags:
         - Tax
-      security:
-        - BearerAuth: []
       parameters:
         -  name: taxId
            in: path
@@ -592,8 +562,6 @@ paths:
       summary: List all discounts
       tags:
         - Discount
-      security:
-        - BearerAuth: []
       responses:
         '200':
           description: OK
@@ -614,8 +582,6 @@ paths:
       summary: Create a new discount
       tags:
         - Discount
-      security:
-        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -640,8 +606,6 @@ paths:
       summary: Get discount by ID
       tags:
         - Discount
-      security:
-        - BearerAuth: []
       parameters:
       -  name: discountId
          in: path
@@ -668,8 +632,6 @@ paths:
       summary: Update a discount
       tags:
         - Discount
-      security:
-        - BearerAuth: []
       parameters:
       -  name: discountId
          in: path
@@ -703,8 +665,6 @@ paths:
       summary: List all gift cards
       tags:
         - GiftCard
-      security:
-        - BearerAuth: []
       responses:
         '200':
           description: OK
@@ -725,8 +685,6 @@ paths:
       summary: Create a new gift card
       tags:
         - GiftCard
-      security:
-        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -751,8 +709,6 @@ paths:
       summary: Get gift card by ID
       tags:
         - GiftCard
-      security:
-        - BearerAuth: []
       parameters:
         -  name: giftCardId
            in: path
@@ -779,8 +735,6 @@ paths:
       summary: Update gift card balance
       tags:
         - GiftCard
-      security:
-        - BearerAuth: []
       parameters:
         -  name: giftCardId
            in: path
@@ -814,8 +768,6 @@ paths:
       summary: Create a new payment for a specific order
       tags:
         - Payment
-      security:
-        - BearerAuth: []
       parameters:
         - name: orderId
           in: path
@@ -848,8 +800,6 @@ paths:
       summary: Get all payments for a specific order
       tags:
         - Payment
-      security:
-        - BearerAuth: []
       parameters:
         - name: orderId
           in: path
@@ -879,8 +829,6 @@ paths:
       summary: Create a refund for a specific order’s payment
       tags:
         - Refund
-      security:
-        - BearerAuth: []
       parameters:
         - name: orderId
           in: path
@@ -914,8 +862,6 @@ paths:
       summary: Retrieve all/filtered MenuItems, that belong to an organization
       tags:
         - MenuItem
-      security:
-        - BearerAuth: []
       responses:
         '200':
           description: Organization MenuItems retrieved
@@ -934,8 +880,6 @@ paths:
       summary: Create a MenuItem in the database
       tags:
         - MenuItem
-      security:
-        - BearerAuth: []
       requestBody:
         description: MenuItem object, without menuItemId, timestamps and variationIds, since menuItemId, timestamps and variationIds will be assigned in back-end
         required: true
@@ -965,8 +909,6 @@ paths:
       summary: Retrieve specified MenuItem
       tags:
         - MenuItem
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: menuItemId
@@ -994,8 +936,6 @@ paths:
       summary: Update specified MenuItem
       tags:
         - MenuItem
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: menuItemId
@@ -1031,8 +971,6 @@ paths:
       summary: Retrieve specified MenuItem image
       tags:
         - MenuItem
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: menuItemId
@@ -1060,8 +998,6 @@ paths:
       summary: Update specified MenuItem image
       tags:
         - MenuItem
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: menuItemId
@@ -1093,8 +1029,6 @@ paths:
       summary: Retrieve all MenuItems, that belong to an organization
       tags:
         - MenuService
-      security:
-        - BearerAuth: []
       responses:
         '200':
           description: Organization MenuItems retrieved
@@ -1113,8 +1047,6 @@ paths:
       summary: Create a MenuItem in the database
       tags:
         - MenuService
-      security:
-        - BearerAuth: []
       requestBody:
         description: MenuItem object, without menuItemId, timestamps and variationIds, since menuItemId, timestamps and variationIds will be assigned in back-end
         required: true
@@ -1144,8 +1076,6 @@ paths:
       summary: Retrieve specified MenuService
       tags:
         - MenuService
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: menuServiceId
@@ -1173,8 +1103,6 @@ paths:
       summary: Update specified MenuService
       tags:
         - MenuService
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: menuServiceId
@@ -1210,8 +1138,6 @@ paths:
       summary: Retrieve specified MenuServices image
       tags:
         - MenuService
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: menuServiceId
@@ -1239,8 +1165,6 @@ paths:
       summary: Update specified MenuServices image
       tags:
         - MenuService
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: menuServiceId
@@ -1272,8 +1196,6 @@ paths:
       summary: Retrieve all orders, that belong to an organization
       tags:
         - Order
-      security:
-        - BearerAuth: []
       responses:
         '200':
           description: Organization orders retrieved
@@ -1292,8 +1214,6 @@ paths:
       summary: Create a closed order in the database
       tags:
         - Order
-      security:
-        - BearerAuth: []
       requestBody:
         description: Order object, without orderId, timestamp and orderItemIds, since orderId, timestamp and orderItemIds will be assigned in back-end
         required: true
@@ -1348,11 +1268,9 @@ paths:
 
   /appointments:
     get:
-      summary: Retrieve all appointmets, that belong to an organization
+      summary: Retrieve all appointments, that belong to an organization
       tags:
         - Appointment
-      security:
-        - BearerAuth: []
       responses:
         '200':
           description: Organization appointments retrieved
@@ -1371,8 +1289,6 @@ paths:
       summary: Create an appointment in the database
       tags:
         - Appointment
-      security:
-        - BearerAuth: []
       requestBody:
         description: Appointment object, without appointmentId, since appointmentId will be assigned in back-end
         required: true
@@ -1402,8 +1318,6 @@ paths:
       summary: Retrieve specified Appointment
       tags:
         - Appointment
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: appointmentId
@@ -1431,8 +1345,6 @@ paths:
       summary: Update specified Appointment
       tags:
         - Appointment
-      security:
-        - BearerAuth: []
       parameters:
         - in: path
           name: appointmentId
@@ -1794,7 +1706,7 @@ components:
           items:
             type: object
             properties:
-              variantionId:
+              variationId:
                 type: string
                 description: Variation identifier
               name:
